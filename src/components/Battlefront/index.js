@@ -84,7 +84,7 @@ export default class Battlefront extends React.Component {
       <div className="container">
         <Exception>
           <div className="battlefront" />
-          {boxes.ma(b => <Box key={b.id} {...b} />)}
+          {boxes.map(b => <Box key={b.id} {...b} />)}
           {end && (
             <div className="end">
               <h1>The End</h1>
