@@ -2,12 +2,15 @@ import React from 'react';
 
 import Box from '../Box';
 import create from '../Box/box-factory';
-import Exception from '../Exception';
 import BB8, { HEIGHT, LEFT, WIDTH } from '../BB8';
 
 import './style.css';
 
 const BOX_SIZE = 80;
+
+export const GROUND_HEIGHT = 200;
+
+export const GROUND_BORDER = 3;
 
 const initialBoxes = [
   create(BOX_SIZE, HEIGHT, false),
@@ -21,14 +24,11 @@ const initialBoxes = [
 const BORDER_VALUE = -2 * BOX_SIZE;
 
 export default class Battlefront extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      boxes: [],
-      boxNear: null,
-      end: false,
-    };
-  }
+  state = {
+    boxes: [],
+    boxNear: null,
+    end: false,
+  };
 
   componentDidMount() {
     this.addNewBox();
@@ -82,17 +82,17 @@ export default class Battlefront extends React.Component {
     const { boxes, boxNear, end } = this.state;
     return (
       <div className="container">
-        <Exception>
-          <div className="battlefront" />
-          {boxes.map(b => <Box key={b.id} {...b} />)}
-          {end && (
-            <div className="end">
-              <h1>The End</h1>
-            </div>
-          )}
+        <div className="battlefront" />
+        {end && (
+          <div className="end">
+            <h1>The End</h1>
+          </div>
+        )}
+        <div className="gravity">
+          {boxes.ma(b => <Box key={b.id} {...b} />)}
           <BB8 box={boxNear} end={end} onCollision={this.endTheGame} />
           <div className="ground" />
-        </Exception>
+        </div>
       </div>
     );
   }

@@ -5,12 +5,13 @@ import './style.css';
 export const HEIGHT = 165;
 export const LEFT = 100;
 export const WIDTH = 132;
+export const INITIAL_POSITION = -HEIGHT / 2;
 
 export default class BB8 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      move: true,
+      move: !props.end,
       up: false,
     };
   }
@@ -38,10 +39,11 @@ export default class BB8 extends React.Component {
   }
 
   componentDidUpdate() {
-    const isCollision = this.props.box &&
+    const isCollision =
+      this.props.box &&
       ((!this.props.box.isTop && !this.state.up) ||
         (this.props.box.isTop && this.state.up));
-    if (typeof this.props.onCollision === 'function' && isCollision) {
+    if (isCollision) {
       this.props.onCollision();
     }
   }
@@ -52,7 +54,11 @@ export default class BB8 extends React.Component {
     return (
       <div
         className={`droid ${move ? 'move' : ''}`}
-        style={{ top: up ? `calc(51.8% - ${box.size + 50}px)` : '51.8%' }}
+        style={{
+          top: up
+            ? `${INITIAL_POSITION - box.size}px`
+            : `${INITIAL_POSITION}px`,
+        }}
       >
         <div className="droid-head">
           <div className="droid-head__eye" />

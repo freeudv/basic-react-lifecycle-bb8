@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Battlefront from './components/Battlefront';
-import ProdException from './components/ProdException';
+import Exception from './components/ProdException';
 
 ReactDOM.render(
-  <ProdException>
+  <Exception>
     <Battlefront />
-  </ProdException>,
+  </Exception>,
   document.getElementById('root'),
 );

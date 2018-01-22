@@ -7,7 +7,7 @@ export default class ProdException extends React.Component {
     error: null,
   };
 
-  componentDidCatch(error) {
+  componentDidCatch(error, info) {
     this.setState({
       error,
     });
@@ -19,12 +19,8 @@ export default class ProdException extends React.Component {
     if (error) {
       return (
         <div className="prod-error">
-          <h1>
-            Oops, it looks like you've catched an error
-          </h1>
-          <p>
-            Please, wait until we fix it
-          </p>
+          <h1>Oops, it looks like you've catched an error</h1>
+          <p>Please, wait until we fix it</p>
         </div>
       );
     }
